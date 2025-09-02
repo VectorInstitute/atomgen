@@ -2547,10 +2547,10 @@ class AtomformerEncoder(nn.Module):
         return input_embeds, pos_embeds
 
 
-class AtomformerPreTrainedModel(PreTrainedModel):
+class AtomformerPreTrainedModel(PreTrainedModel):  # type: ignore[no-untyped-call]
     """Base class for all transformer models."""
 
-    config_class = AtomformerConfig  # type: ignore[assignment]
+    config_class = AtomformerConfig
     base_model_prefix = "model"
     supports_gradient_checkpointing = True
     _no_split_modules = ["ParallelBlock"]
@@ -2562,7 +2562,7 @@ class AtomformerPreTrainedModel(PreTrainedModel):
             module.gradient_checkpointing = value
 
 
-class AtomformerModel(AtomformerPreTrainedModel):
+class AtomformerModel(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer model for atom modeling."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2581,7 +2581,7 @@ class AtomformerModel(AtomformerPreTrainedModel):
         return output
 
 
-class AtomformerForMaskedAM(AtomformerPreTrainedModel):
+class AtomformerForMaskedAM(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an atom modeling head on top for masked atom modeling."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2611,7 +2611,7 @@ class AtomformerForMaskedAM(AtomformerPreTrainedModel):
         return loss, logits
 
 
-class AtomformerForCoordinateAM(AtomformerPreTrainedModel):
+class AtomformerForCoordinateAM(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an atom coordinate head on top for coordinate denoising."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2641,7 +2641,7 @@ class AtomformerForCoordinateAM(AtomformerPreTrainedModel):
         return loss, coords_pred
 
 
-class InitialStructure2RelaxedStructure(AtomformerPreTrainedModel):
+class InitialStructure2RelaxedStructure(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an coordinate head on top for relaxed structure prediction."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2674,7 +2674,7 @@ class InitialStructure2RelaxedStructure(AtomformerPreTrainedModel):
         return loss, coords_pred
 
 
-class InitialStructure2RelaxedEnergy(AtomformerPreTrainedModel):
+class InitialStructure2RelaxedEnergy(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an energy head on top for relaxed energy prediction."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2704,7 +2704,7 @@ class InitialStructure2RelaxedEnergy(AtomformerPreTrainedModel):
         return loss, energy
 
 
-class InitialStructure2RelaxedStructureAndEnergy(AtomformerPreTrainedModel):
+class InitialStructure2RelaxedStructureAndEnergy(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an coordinate and energy head."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2757,7 +2757,7 @@ class InitialStructure2RelaxedStructureAndEnergy(AtomformerPreTrainedModel):
         return loss, (formation_energy_pred, coords_pred)
 
 
-class Structure2Energy(AtomformerPreTrainedModel):
+class Structure2Energy(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an atom modeling head on top for masked atom modeling."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2799,7 +2799,7 @@ class Structure2Energy(AtomformerPreTrainedModel):
         )
 
 
-class Structure2Forces(AtomformerPreTrainedModel):
+class Structure2Forces(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with a forces head on top for forces prediction."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2841,7 +2841,7 @@ class Structure2Forces(AtomformerPreTrainedModel):
         )
 
 
-class Structure2EnergyAndForces(AtomformerPreTrainedModel):
+class Structure2EnergyAndForces(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an energy and forces head for energy and forces prediction."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2892,7 +2892,7 @@ class Structure2EnergyAndForces(AtomformerPreTrainedModel):
         return loss, (formation_energy_pred, forces_pred, attention_mask)
 
 
-class Structure2TotalEnergyAndForces(AtomformerPreTrainedModel):
+class Structure2TotalEnergyAndForces(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with an energy and forces head for energy and forces prediction."""
 
     def __init__(self, config: AtomformerConfig):
@@ -2949,7 +2949,7 @@ class Structure2TotalEnergyAndForces(AtomformerPreTrainedModel):
         return loss, (total_energy_pred, forces_pred, attention_mask)
 
 
-class AtomFormerForSystemClassification(AtomformerPreTrainedModel):
+class AtomFormerForSystemClassification(AtomformerPreTrainedModel):  # type: ignore[no-untyped-call]
     """Atomformer with a classification head for system classification."""
 
     def __init__(self, config: AtomformerConfig):

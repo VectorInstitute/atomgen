@@ -2351,7 +2351,7 @@ class TransformerConfig(PretrainedConfig):
         gradient_checkpointing: bool = False,
         **kwargs: Any,
     ):
-        super().__init__(**kwargs)  # type: ignore[no-untyped-call]
+        super().__init__(**kwargs)
         self.vocab_size = vocab_size
         self.dim = dim
         self.num_heads = num_heads
@@ -2507,7 +2507,7 @@ class TransformerEncoder(nn.Module):
         return input_embeds
 
 
-class TransformerPreTrainedModel(PreTrainedModel):
+class TransformerPreTrainedModel(PreTrainedModel):  # type: ignore[no-untyped-call]
     """Base class for all transformer models."""
 
     config_class = TransformerConfig
@@ -2515,7 +2515,7 @@ class TransformerPreTrainedModel(PreTrainedModel):
     supports_gradient_checkpointing = True
     _no_split_modules = ["ParallelBlock"]
 
-    def _set_gradient_checkpointing(
+    def _set_gradient_checkpointing(  # type: ignore[override]
         self, module: nn.Module, value: bool = False
     ) -> None:
         if isinstance(module, (TransformerEncoder)):
