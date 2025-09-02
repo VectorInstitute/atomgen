@@ -162,7 +162,7 @@ def train(args: argparse.Namespace) -> None:
         config.gradient_checkpointing = (
             args.gradient_checkpointing if args.gradient_checkpointing else False
         )
-        model = Structure2EnergyAndForces(config)  # type: ignore[arg-type]
+        model = Structure2EnergyAndForces(config)
 
     tokenizer = AtomTokenizer(vocab_file=args.tokenizer_json)
     data_collator = DataCollatorForAtomModeling(
@@ -173,7 +173,7 @@ def train(args: argparse.Namespace) -> None:
         return_edge_indices=False,
     )
 
-    local_rank = int(os.environ.get("LOCAL_RANK", 0))
+    local_rank = int(os.environ.get("LOCAL_RANK", "0"))
     if local_rank == 0:
         wandb.login(key=os.environ["WANDB_API_KEY"])
         wandb.init(project=args.project, config=vars(args), name=args.name)
@@ -207,14 +207,14 @@ def train(args: argparse.Namespace) -> None:
         weight_decay=args.weight_decay,
     )
 
-    trainer = Trainer(  # type: ignore[no-untyped-call]
+    trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=dataset,
         data_collator=data_collator,
     )
 
-    trainer.train(resume_from_checkpoint=args.checkpoint_exists)  # type: ignore[attr-defined]
+    trainer.train(resume_from_checkpoint=args.checkpoint_exists)
 
     model.save_pretrained(args.output_dir)
 

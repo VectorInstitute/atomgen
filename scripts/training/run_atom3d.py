@@ -121,7 +121,7 @@ def run_atom3d(args: argparse.Namespace) -> None:
             else False,
             problem_type=task_config["problem_type"],
         )
-        model = AtomFormerForSystemClassification(config)  # type: ignore[arg-type]
+        model = AtomFormerForSystemClassification(config)
     else:
         config = AtomformerConfig.from_pretrained(
             args.model,
@@ -157,7 +157,7 @@ def run_atom3d(args: argparse.Namespace) -> None:
         return_edge_indices=False,
     )
 
-    local_rank = int(os.environ.get("LOCAL_RANK", 0))
+    local_rank = int(os.environ.get("LOCAL_RANK", "0"))
     if local_rank == 0:
         wandb.login(key=os.environ.get("WANDB_API_KEY"))
         wandb.init(project=args.project, config=vars(args), name=args.name)
@@ -182,7 +182,7 @@ def run_atom3d(args: argparse.Namespace) -> None:
     )
 
     # Initialize trainer
-    trainer = Trainer(  # type: ignore[no-untyped-call]
+    trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=dataset["train"],
@@ -192,12 +192,12 @@ def run_atom3d(args: argparse.Namespace) -> None:
     )
 
     # Train the model
-    trainer.train()  # type: ignore[attr-defined]
+    trainer.train()
 
-    trainer.evaluate(dataset["test"])  # type: ignore[attr-defined]
+    trainer.evaluate(dataset["test"])
 
     # Save the model
-    trainer.save_model(args.output_dir)  # type: ignore[attr-defined]
+    trainer.save_model(args.output_dir)
 
 
 if __name__ == "__main__":

@@ -105,7 +105,7 @@ class SchNetConfig(PretrainedConfig):
         cls_token_id: int = 122,
         **kwargs: Any,
     ):
-        super().__init__(**kwargs)  # type: ignore[no-untyped-call]
+        super().__init__(**kwargs)
         self.vocab_size = vocab_size
         self.hidden_channels = hidden_channels
         self.num_filters = num_filters
@@ -126,7 +126,7 @@ class SchNetConfig(PretrainedConfig):
         self.cls_token_id = cls_token_id
 
 
-class SchNetPreTrainedModel(PreTrainedModel):
+class SchNetPreTrainedModel(PreTrainedModel):  # type: ignore[no-untyped-call]
     """
     A base class for all SchNet models.
 
@@ -134,12 +134,12 @@ class SchNetPreTrainedModel(PreTrainedModel):
     simple interface for loading and exporting models.
     """
 
-    config_class = SchNetConfig  # type: ignore[assignment]
+    config_class = SchNetConfig
     base_model_prefix = "model"
     supports_gradient_checkpointing = False
 
 
-class SchNetModel(SchNetPreTrainedModel):
+class SchNetModel(SchNetPreTrainedModel):  # type: ignore[no-untyped-call]
     """
     SchNet model for energy prediction.
 

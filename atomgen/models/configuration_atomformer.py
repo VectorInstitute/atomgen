@@ -30,7 +30,7 @@ class AtomformerConfig(PretrainedConfig):
         cls_token_id: int = 122,
         **kwargs: Any,
     ) -> None:
-        super().__init__(**kwargs)  # type: ignore[no-untyped-call]
+        super().__init__(**kwargs)
         self.vocab_size = vocab_size
         self.dim = dim
         self.num_heads = num_heads
