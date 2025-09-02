@@ -173,7 +173,7 @@ def train(args: argparse.Namespace) -> None:
         return_edge_indices=False,
     )
 
-    local_rank = int(os.environ.get("LOCAL_RANK", 0))
+    local_rank = int(os.environ.get("LOCAL_RANK", "0"))
     if local_rank == 0:
         wandb.login(key=os.environ["WANDB_API_KEY"])
         wandb.init(project=args.project, config=vars(args), name=args.name)
