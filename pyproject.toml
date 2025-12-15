@@ -18,6 +18,7 @@ dependencies = [
     "idna==3.7",
     "scipy>=1.15.3",
     "scikit-learn>=1.6.1",
+    "urllib3>=2.6.0",
 ]
 
 [dependency-groups]
