@@ -266,7 +266,7 @@ test = [
 requires-dist = [
     { name = "accelerate", specifier = ">=0.29.3" },
     { name = "datasets", specifier = ">=2.19.0" },
-    { name = "filelock", specifier = "==3.20.3" },
+    { name = "filelock", specifier = ">=3.20.3" },
     { name = "idna", specifier = "==3.7" },
     { name = "scikit-learn", specifier = ">=1.6.1" },
     { name = "scipy", specifier = ">=1.15.3" },
