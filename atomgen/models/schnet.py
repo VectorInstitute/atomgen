@@ -134,7 +134,7 @@ class SchNetPreTrainedModel(PreTrainedModel):  # type: ignore[no-untyped-call]
     simple interface for loading and exporting models.
     """
 
-    config_class = SchNetConfig
+    config_class = SchNetConfig  # type: ignore[assignment]
     base_model_prefix = "model"
     supports_gradient_checkpointing = False
 
