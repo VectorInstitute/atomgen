@@ -13,7 +13,7 @@ from transformers.utils.generic import PaddingStrategy, TensorType
 VOCAB_FILES_NAMES: Dict[str, str] = {"vocab_file": "tokenizer.json"}
 
 
-class AtomTokenizer(PreTrainedTokenizer):
+class AtomTokenizer(PreTrainedTokenizer):  # type: ignore[misc]
     """
     Tokenizer for atomistic data.
 
@@ -43,7 +43,7 @@ class AtomTokenizer(PreTrainedTokenizer):
             [(ids, tok) for tok, ids in self.vocab.items()]
         )
 
-        super().__init__(  # type: ignore[no-untyped-call]
+        super().__init__(
             pad_token=pad_token,
             mask_token=mask_token,
             bos_token=bos_token,
@@ -63,7 +63,7 @@ class AtomTokenizer(PreTrainedTokenizer):
                 )
         return vocab
 
-    def _tokenize(self, text: str) -> List[str]:  # type: ignore[override]
+    def _tokenize(self, text: str) -> List[str]:
         """Tokenize the text."""
         tokens = []
         i = 0
@@ -95,7 +95,7 @@ class AtomTokenizer(PreTrainedTokenizer):
         """Convert the list of chemical symbol tokens to a concatenated string."""
         return "".join(tokens)
 
-    def pad(  # type: ignore[override]
+    def pad(
         self,
         encoded_inputs: Union[
             BatchEncoding,
@@ -155,7 +155,7 @@ class AtomTokenizer(PreTrainedTokenizer):
                     pad_to_multiple_of=pad_to_multiple_of,
                 )
 
-        return super().pad(
+        return super().pad(  # type: ignore[no-any-return]
             encoded_inputs=encoded_inputs,
             padding=padding,
             max_length=max_length,
