@@ -2510,7 +2510,7 @@ class TransformerEncoder(nn.Module):
 class TransformerPreTrainedModel(PreTrainedModel):  # type: ignore[no-untyped-call]
     """Base class for all transformer models."""
 
-    config_class = TransformerConfig
+    config_class = TransformerConfig  # type: ignore[assignment]
     base_model_prefix = "model"
     supports_gradient_checkpointing = True
     _no_split_modules = ["ParallelBlock"]

@@ -81,8 +81,8 @@ class DataCollatorForAtomModeling(DataCollatorMixin):
         # Handle dict or lists with proper padding and conversion to tensor.
         if self.pad:
             if isinstance(examples[0], Mapping):
-                batch: Dict[str, Any] = self.tokenizer.pad(  # type: ignore[assignment]
-                    examples,  # type: ignore[arg-type]
+                batch: Dict[str, Any] = self.tokenizer.pad(
+                    examples,
                     return_tensors="pt",
                     pad_to_multiple_of=self.pad_to_multiple_of,
                 )
@@ -186,7 +186,7 @@ class DataCollatorForAtomModeling(DataCollatorMixin):
         inputs = torch.where(
             ~mask,
             inputs,
-            self.tokenizer.convert_tokens_to_ids(self.tokenizer.mask_token),  # type: ignore[arg-type]
+            self.tokenizer.convert_tokens_to_ids(self.tokenizer.mask_token),
         )
         labels = torch.where(mask, labels, -100)
         if special_tokens_mask is not None:

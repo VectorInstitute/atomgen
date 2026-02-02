@@ -2550,7 +2550,7 @@ class AtomformerEncoder(nn.Module):
 class AtomformerPreTrainedModel(PreTrainedModel):  # type: ignore[no-untyped-call]
     """Base class for all transformer models."""
 
-    config_class = AtomformerConfig
+    config_class = AtomformerConfig  # type: ignore[assignment]
     base_model_prefix = "model"
     supports_gradient_checkpointing = True
     _no_split_modules = ["ParallelBlock"]
