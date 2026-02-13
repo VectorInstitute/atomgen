@@ -21,7 +21,9 @@ def process_data(db_path: str, output_dir: str) -> None:
         "has_formation_energy": [],
     }
     db = LmdbDataset(config={"src": db_path})
-    for j in tqdm(range(len(db)), desc=f"Processing {db_path.split('/')[-1]}"):
+    for j in tqdm(
+        range(len(db)), desc=f"Processing {db_path.rsplit('/', maxsplit=1)[-1]}"
+    ):
         dataset["input_ids"].append(db[j].atomic_numbers.short())
         dataset["coords"].append(db[j].pos)
         dataset["forces"].append(db[j].force)
@@ -29,7 +31,9 @@ def process_data(db_path: str, output_dir: str) -> None:
         dataset["total_energy"].append(np.array(db[j].y).astype("float32"))
         dataset["has_formation_energy"].append(False)
     hf_dataset = Dataset.from_dict(dataset)
-    hf_dataset.save_to_disk(f"{output_dir}/{db_path.split('/')[-1].split('.')[-2]}")
+    hf_dataset.save_to_disk(
+        f"{output_dir}/{db_path.rsplit('/', maxsplit=1)[-1].split('.')[-2]}"
+    )
 
 
 def main(args: argparse.Namespace) -> None:
